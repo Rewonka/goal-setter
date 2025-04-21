@@ -13,7 +13,7 @@ This is a mobile application built with **React Native**.
 
 ### Plan for the future
 | Milestone | Function to add |
-| ---------- | --------------- |
+| :-------: | --------------- |
 | 1 | Edit / Delete goals |
 | 2 | Weekly / custom recurrence |
 | 3 | Local notification |
