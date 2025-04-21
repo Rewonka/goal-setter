@@ -11,6 +11,16 @@ This is a mobile application built with **React Native**.
 - Keeps a consecutive‑day streak
 - Celebrates each check‑in with a medal animation
 
+### Plan for the future
+| Milestone | Function to add |
+| ---------- | --------------- |
+| 1 | Edit / Delete goals |
+| 2 | Weekly / custom recurrence |
+| 3 | Local notification |
+| 4 | Dark-mode polish |
+| 5 | Sync to cloud |
+| 6 | History & charts | 
+
 ## 🚀 Getting Started
 
 ### Prerequisites
