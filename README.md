@@ -2,6 +2,12 @@
 
 This is a mobile application built with **React Native**.
 
+![react](https://img.shields.io/badge/react-gray?logo=react)
+![javascript](https://img.shields.io/badge/javascript-gray?logo=javascript)
+![node](https://img.shields.io/badge/node.js-gray?logo=node.js)
+
+![last commit](https://img.shields.io/github/last-commit/Rewonka/goal-setter)
+
 ## Simple goal setter App
 
 ### Now you can:
