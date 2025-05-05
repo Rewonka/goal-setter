@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Checkbox from 'expo-checkbox';
 import { View, Text, Pressable, FlatList, StyleSheet } from 'react-native';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
 import { useGoals, Goal } from '../GoalContext';
@@ -10,12 +11,29 @@ import BadgeModal from '../component/BadgeModal';
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: Props) {
-  const { goals, toggleDone } = useGoals();
+  const { goals, toggleDone, deleteGoal } = useGoals();
+  const { showActionSheetWithOptions } = useActionSheet();
+
   /* (2) local state that controls the modal */
   const [badge, setBadge] = useState<{ title: string; streak: number } | null>(
     null
   );
   
+  const handleLongPress = (item: Goal) => {
+    const options = ['Delete Goal', 'Cancel'];
+    const destructiveButtonIndex = 0;
+    const cancelButtonIndex = 1;
+
+    showActionSheetWithOptions(
+      { options, cancelButtonIndex, destructiveButtonIndex },
+      buttonIndex => {
+        if (buttonIndex === destructiveButtonIndex) {
+          deleteGoal(item.id);
+        }
+      }
+    );
+  };
+
   /* (3) helper that wraps toggleDone and, if success, opens the modal */
   const handleToggle = (item: Goal) => {
     if (!item.doneToday) {
@@ -41,6 +59,7 @@ export default function HomeScreen({ navigation }: Props) {
         renderItem={({ item }) => (
             <Pressable
             onPress={() => handleToggle(item)}
+            onLongPress={() => handleLongPress(item)}
             style={styles.goalRow}
           >
             <Checkbox value={item.doneToday} />
@@ -56,7 +75,7 @@ export default function HomeScreen({ navigation }: Props) {
         onPress={() => navigation.navigate('AddGoal')}
         style={styles.fab}
       >
-        <Text style={styles.fabText}>+</Text>
+        <Text style={styles.fabText}>＋</Text>
       </Pressable>
 
       {badge && (
@@ -82,7 +101,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    bottom: 32,
+    bottom: 62,
     right: 32,
     width: 56,
     height: 56,

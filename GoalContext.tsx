@@ -14,6 +14,7 @@ type GoalContextType = {
   goals: Goal[];
   addGoal: (title: string) => void;
   toggleDone: (id: string) => void;
+  deleteGoal: (id: string) => void;
 };
 
 const GoalContext = createContext<GoalContextType | null>(null);
@@ -90,12 +91,16 @@ export function GoalProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const deleteGoal = (id: string) => {
+    setGoals(prev => prev.filter(g => g.id !== id));
+  };
+
   /* ---------- Render ---------- */
   if (!goals) return null;           // can replace with a splash later
 
 
   return (
-    <GoalContext.Provider value={{ goals, addGoal, toggleDone }}>
+    <GoalContext.Provider value={{ goals, addGoal, toggleDone, deleteGoal }}>
       {children}
     </GoalContext.Provider>
   );
